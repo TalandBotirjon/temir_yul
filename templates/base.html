@@ -1,0 +1,40 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" >
+    <title>Temir yul</title>
+</head>
+<body>
+    <header>
+        <h1><a href="{% url 'home' %}" > Temir yo'llar</a></h1>
+    </header>
+    <br>
+    <hr style="color: red" >
+    {% if user.is_authenticated %}
+        <p>Xush kelibsiz:  {{ user.username }}! </p>
+        <button><a href="{% url 'logout' %}">Chiqib ketish</a></button>
+    {% else %}
+        <p>
+            <button><a href="{% url 'login' %}">Saytga kirish </a></button>
+            <button><a href="{% url 'signup' %}">Ro'yhatdan o'tish. </a></button>
+
+        </p>
+    {% endif %}
+    <div>
+        {% block content %}
+        {% endblock content %}
+    </div>
+    <footer>
+        <button>
+            <h2>
+                <a href="{% url 'post_new' %}" >
+                    Yangi post yozish
+                </a>
+            </h2>
+        </button>
+    </footer>
+</body>
+</html>
